@@ -1,2 +1,2 @@
-# Polycube Puzzle Generator
+# Polycube
 A generator of polycube packing puzzles
