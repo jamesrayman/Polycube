@@ -1,4 +1,4 @@
-src = $(wildcard src/*.cpp)
+src = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 obj = $(src:.cpp=.o)
 
 LDFLAGS = -std=c++17

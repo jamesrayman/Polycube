@@ -1,19 +1,22 @@
 #include <iostream>
 
-#include "vector.h"
-#include "matrix.h"
+#include "util/vector.h"
+#include "util/matrix.h"
+#include "util/lattice.h"
 
-int main() {
-	Vector<3> v;
-	v[0] = 2;
-	v[1] = 3;
-	v[2] = 7;
+int main () {
+	Lattice<int, 2> lattice { { 1, 2, 3 }, { 4, 5, 6 } };
 
-	auto mat = Matrix<4>::translation(v); 
+	lattice = Matrix<3>::planeRotation(0, 1, 3) * lattice;
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			std::cout << mat[j][i] << " ";
+	for (int i = 0; i < 2; i++) {
+		std::cout << lattice.shape()[i] << " ";
+	}
+	std::cout << "\n\n";
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 2; j++) {
+			std::cout << lattice[{ i, j }] << " ";
 		}
 		std::cout << "\n";
 	}
