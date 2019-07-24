@@ -33,6 +33,9 @@ public:
 
     T& operator[] (const Vector<DIM>&);
     const T& operator[] (const Vector<DIM>&) const;
+
+    bool operator== (const Lattice<T, DIM>&) const;
+    bool operator!= (const Lattice<T, DIM>&) const;
 };
 
 template<typename T>
@@ -61,6 +64,9 @@ public:
 
     T& operator[] (const Vector<0>&);
     const T& operator[] (const Vector<0>&) const;
+
+    bool operator== (const Lattice<T, 0>&) const;
+    bool operator!= (const Lattice<T, 0>&) const;
 };
 
 #include "lattice.tpp"

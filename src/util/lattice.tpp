@@ -100,6 +100,16 @@ const T& Lattice<T, DIM>::operator[] (const Vector<DIM>& index) const {
     return at(index);
 }
 
+template<typename T, std::size_t DIM>
+bool Lattice<T, DIM>::operator== (const Lattice<T, DIM>& other) const {
+    return data == other.data;
+}
+
+template<typename T, std::size_t DIM>
+bool Lattice<T, DIM>::operator!= (const Lattice<T, DIM>& other) const {
+    return !(*this == other);
+}
+
 
 
 template<typename T>
@@ -150,3 +160,12 @@ const T& Lattice<T, 0>::operator[] (const Vector<0>& index) const {
     return at(index);
 }
 
+template<typename T>
+bool Lattice<T, 0>::operator== (const Lattice<T, 0>& other) const {
+    return value == other.value;
+}
+
+template<typename T>
+bool Lattice<T, 0>::operator!= (const Lattice<T, 0>& other) const {
+    return !(*this == other);
+}
