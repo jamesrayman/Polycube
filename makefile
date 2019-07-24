@@ -1,9 +1,9 @@
-src = $(wildcard src/**.cpp)
+src = $(wildcard src/*/*.cpp)
 obj = $(src:.cpp=.o)
 
 LDFLAGS = -std=c++17
 
-bin/polycube: $(obj)
+bin/cli: $(obj)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean

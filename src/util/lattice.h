@@ -30,6 +30,7 @@ public:
     Matrix<DIM+1> properTransformation (const Matrix<DIM+1>&) const;
     std::vector<Vector<DIM>> allPositions () const;
     Lattice<T, DIM> transform (const Matrix<DIM+1>&) const;
+    bool isomorph (const Lattice<T, DIM>, const std::vector<Matrix<DIM+1>>&);
 
     T& operator[] (const Vector<DIM>&);
     const T& operator[] (const Vector<DIM>&) const;
