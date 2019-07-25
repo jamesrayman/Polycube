@@ -7,22 +7,22 @@
 #include "../util/lattice.h"
 
 template<std::size_t DIM>
-class Block {
+class Polycube {
 private:
-    Lattice<bool, DIM> block;
+    Lattice<bool, DIM> polycube;
     std::vector<Matrix<DIM+1>> rotations; // proper rotations
 
 public:
-    Block ();
-    Block (const Block<DIM>&);
-    Block (const Lattice<bool, DIM>&);
+    Polycube ();
+    Polycube (const Polycube<DIM>&);
+    Polycube (const Lattice<bool, DIM>&);
 
     const std::vector<Matrix<DIM+1>>& allRotations () const;
     
     bool operator[] (const Vector<DIM>&) const;
 
-    bool operator== (const Block<DIM>&) const;
-    bool operator!= (const Block<DIM>&) const;
+    bool operator== (const Polycube<DIM>&) const;
+    bool operator!= (const Polycube<DIM>&) const;
 
-    Block<DIM>& operator= (const Block<DIM>&);
+    Polycube<DIM>& operator= (const Polycube<DIM>&);
 };

@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "block.h"
-#include "block_list.h"
+#include "polycube.h"
+#include "polycube_list.h"
 
 template<std::size_t DIM>
 class Board {
@@ -15,7 +15,7 @@ public:
     Board (const Board&);
     Board (const Lattice<int, DIM>&);
 
-    std::vector<Board<DIM>> solve (const BlockList<DIM>& blocks);
+    std::vector<Board<DIM>> solve (const PolycubeList<DIM>&);
 
     bool operator== (const Board<DIM>&) const; 
     bool operator!= (const Board<DIM>&) const; 
