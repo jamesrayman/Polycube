@@ -9,12 +9,22 @@
 #include "../polycube/polycube.h"
 #include "../polycube/polycube_list.h"
 #include "../polycube/board.h"
+#include "../polycube/puzzle.h"
 
-#include "util.h"
-#include "parser.h"
+#include "read.h"
+#include "parse.h"
+#include "format.h"
 
 int main (int argc, char** argv) {
-	std::cout << util::readCommandLine(argc, argv) << "\n";
+	auto puzzleData = read::commandLine(argc, argv);
+	// auto puzzle = parse::puzzle(puzzleData);
+
+	std::cout << "\nInitiating search for solutions.\n";
+
+	// auto solutions = puzzle.solve();
+
+	std::cout << "Search complete.\n\n";
+	// std::cout << format::solutions(solutions);
 
 	return 0;
 }

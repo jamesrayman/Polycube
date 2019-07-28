@@ -1,5 +1,9 @@
 #include "util.h"
 
+#include <vector>
+
+#include "vector.h"
+
 namespace util {
     int chi (int n) {
         if (n < 0) return -chi(-n);

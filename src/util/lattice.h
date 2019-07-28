@@ -3,6 +3,9 @@
 #include <vector>
 #include <initializer_list>
 
+template<typename T, std::size_t DIM>
+class Lattice;
+
 #include "vector.h"
 #include "matrix.h"
 
@@ -30,7 +33,7 @@ public:
     Matrix<DIM+1> properTransformation (const Matrix<DIM+1>&) const;
     std::vector<Vector<DIM>> allPositions () const;
     Lattice<T, DIM> transform (const Matrix<DIM+1>&) const;
-    bool isomorph (const Lattice<T, DIM>, const std::vector<Matrix<DIM+1>>&);
+    bool isomorph (const Lattice<T, DIM>&, const std::vector<Matrix<DIM+1>>&);
 
     T& operator[] (const Vector<DIM>&);
     const T& operator[] (const Vector<DIM>&) const;
