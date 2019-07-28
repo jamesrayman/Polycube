@@ -5,14 +5,14 @@
 #include "vector.h"
 
 namespace util {
-    int chi (int n) {
+    inline int chi (int n) {
         if (n < 0) return -chi(-n);
         if (n % 2 == 0) return 0;
         if (n % 4 == 1) return 1;
         return -1;
     }
 
-    int sgn (std::vector<int>& v) {
+    inline int sgn (std::vector<int>& v) {
         int transpositions = 0;
 
         for (int i = 0; i < v.size(); i++) {
@@ -26,7 +26,7 @@ namespace util {
     }
 
     template<std::size_t N>
-    Vector<N+1> raise (int x, const Vector<N>& v) {
+    inline Vector<N+1> raise (int x, const Vector<N>& v) {
         Vector<N+1> res;
         res[0] = x;
 
@@ -38,12 +38,12 @@ namespace util {
     }
     
     template<>
-    Vector<1> raise<0> (int x, const Vector<0>& v) {
+    inline Vector<1> raise<0> (int x, const Vector<0>& v) {
         return Vector<1> { x };
     }
 
     template<std::size_t N>
-    Vector<N-1> flatten (const Vector<N>& v) {
+    inline Vector<N-1> flatten (const Vector<N>& v) {
         Vector<N-1> res;
 
         for (int i = 0; i < N-1; i++) {
@@ -54,12 +54,12 @@ namespace util {
     }
     
     template<>
-    Vector<0> flatten<1> (const Vector<1>&) {
+    inline Vector<0> flatten<1> (const Vector<1>&) {
         return Vector<0>();
     }
 
     template<std::size_t N>
-    std::vector<Vector<N>> allMinors (const Vector<N>& shape) {
+    inline std::vector<Vector<N>> allMinors (const Vector<N>& shape) {
         auto subMinors = allMinors(flatten(shape));
         std::vector<Vector<N>> res;
 
@@ -73,7 +73,7 @@ namespace util {
     }
 
     template<>
-    std::vector<Vector<0>> allMinors<0> (const Vector<0>&) {
+    inline std::vector<Vector<0>> allMinors<0> (const Vector<0>&) {
         return std::vector<Vector<0>>{ Vector<0>() };
     }
 }
