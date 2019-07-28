@@ -70,10 +70,10 @@ std::vector<Vector<DIM>> Lattice<T, DIM>::allPositions () const {
 
 
 template<typename T, std::size_t DIM>
-Lattice<T, DIM> Lattice<T, DIM>::transform (const Matrix<DIM+1>& rotation) const {
-    auto properRotation = properTransformation(rotation);
+Lattice<T, DIM> Lattice<T, DIM>::transform (const Matrix<DIM+1>& transformation) const {
+    auto properTransformation = properTransformation(transformation);
     auto allPositions = this->allPositions();
-    auto resShape = rotation * shape();
+    auto resShape = transformation * shape();
 
     for (int i = 0; i < DIM; i++) {
         if (resShape[i] < 0) {
@@ -84,10 +84,33 @@ Lattice<T, DIM> Lattice<T, DIM>::transform (const Matrix<DIM+1>& rotation) const
     Lattice<T, DIM> res (resShape);
 
     for (const auto& position : allPositions) {
-        res[properRotation * position] = (*this)[position];
+        res[properTransformation * position] = (*this)[position];
     }
 
     return res;
+}
+
+template<typename T, std::size_t DIM>
+bool Lattice<T, DIM>::inBounds (const Vector<DIM>& index) const {
+    auto shape = this.shape();
+
+    for (int i = 0; i < DIM; i++) {
+        if (index[i] < 0 || index[i] >= shape[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template<typename T, std::size_t DIM>
+bool Lattice<T, DIM>::isomorphic (const Lattice<T, DIM>& other, const std::vector<Matrix<DIM+1>>& transforms) const {
+    for (const auto& transform : transforms) {
+        if (*this == transform * other) {
+            return true;
+        }
+    }
+    return false;
 }
 
 template<typename T, std::size_t DIM>
@@ -109,7 +132,6 @@ template<typename T, std::size_t DIM>
 bool Lattice<T, DIM>::operator!= (const Lattice<T, DIM>& other) const {
     return !(*this == other);
 }
-
 
 
 template<typename T>

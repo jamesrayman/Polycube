@@ -16,6 +16,10 @@ namespace read {
     }
 
     std::string commandLine (int argc, char** argv) {
+        if (argc == 2) {
+            return file(std::string(argv[1]));
+        }
+
         std::string res = "";
 
         for (int i = 1; i < argc; i++) {
@@ -24,23 +28,23 @@ namespace read {
         }
         res += "\n";
 
-        int hashtagCount = 0;
+        int terminatorCount = 0;
 
         for (char c : res) {
-            if (c == '#') {
-                hashtagCount++;
+            if (c == '%') {
+                terminatorCount++;
             }
         }
 
-        while (hashtagCount < 4) {
+        while (terminatorCount < 4) {
             std::cout << "> ";
 
             std::string line;
             std::getline(std::cin, line);
 
             for (char c : line) {
-                if (c == '#') {
-                    hashtagCount++;
+                if (c == '%') {
+                    terminatorCount++;
                 }
             }
 

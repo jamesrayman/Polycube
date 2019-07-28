@@ -14,7 +14,7 @@ class Lattice {
     friend class Lattice<T, DIM+1>;
 private:
     std::vector<Lattice<T, DIM-1>> data;
-
+protected:
     template<std::size_t N>
     T& at (const Vector<N>&);
 
@@ -33,7 +33,8 @@ public:
     Matrix<DIM+1> properTransformation (const Matrix<DIM+1>&) const;
     std::vector<Vector<DIM>> allPositions () const;
     Lattice<T, DIM> transform (const Matrix<DIM+1>&) const;
-    bool isomorph (const Lattice<T, DIM>&, const std::vector<Matrix<DIM+1>>&);
+    bool inBounds (const Vector<DIM>&) const;
+    bool isomorphic (const Lattice<T, DIM>&, const std::vector<Matrix<DIM+1>>&) const;
 
     T& operator[] (const Vector<DIM>&);
     const T& operator[] (const Vector<DIM>&) const;

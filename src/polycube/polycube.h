@@ -12,6 +12,7 @@ private:
     std::vector<Matrix<DIM+1>> rotations; // proper rotations
 
     using Lattice<int, DIM>::transform;
+    using Lattice<int, DIM>::isomorphic;
 
     using Lattice<int, DIM>::operator==;
     using Lattice<int, DIM>::operator!=;
