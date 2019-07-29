@@ -94,6 +94,17 @@ Matrix<DIM>& Matrix<DIM>::operator= (const Matrix<DIM>& other) {
 }
 
 template<std::size_t DIM>
+bool Matrix<DIM>::operator== (const Matrix<DIM>& other) const {
+    return data == other.data;
+}
+
+template<std::size_t DIM>
+bool Matrix<DIM>::operator!= (const Matrix<DIM>& other) const {
+    return !(*this == other);
+}
+
+
+template<std::size_t DIM>
 Vector<DIM>& Matrix<DIM>::operator[] (int i) {
     return data[i];
 }

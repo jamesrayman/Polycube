@@ -79,6 +79,16 @@ Vector<DIM>& Vector<DIM>::operator= (const Vector& other) {
 }
 
 template<std::size_t DIM>
+bool Vector<DIM>::operator== (const Vector<DIM>& other) const {
+    return data == other.data;
+}
+
+template<std::size_t DIM>
+bool Vector<DIM>::operator!= (const Vector<DIM>& other) const {
+    return !(*this == other);
+}
+
+template<std::size_t DIM>
 Vector<DIM> Vector<DIM>::unitAxis (int axis) {
     Vector<DIM> res;
 

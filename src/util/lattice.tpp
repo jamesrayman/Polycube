@@ -71,14 +71,13 @@ std::vector<Vector<DIM>> Lattice<T, DIM>::allPositions () const {
 
 template<typename T, std::size_t DIM>
 Lattice<T, DIM> Lattice<T, DIM>::transform (const Matrix<DIM+1>& transformation) const {
-    auto properTransformation = properTransformation(transformation);
+    auto properTransformation = this->properTransformation(transformation);
     auto allPositions = this->allPositions();
     auto resShape = transformation * shape();
+    auto resZero = transformation * Vector<DIM>();
 
     for (int i = 0; i < DIM; i++) {
-        if (resShape[i] < 0) {
-            resShape[i] = -resShape[i];
-        }
+        resShape[i] = std::abs(resShape[i] - resZero[i]);
     }
 
     Lattice<T, DIM> res (resShape);
@@ -92,7 +91,7 @@ Lattice<T, DIM> Lattice<T, DIM>::transform (const Matrix<DIM+1>& transformation)
 
 template<typename T, std::size_t DIM>
 bool Lattice<T, DIM>::inBounds (const Vector<DIM>& index) const {
-    auto shape = this.shape();
+    auto shape = this->shape();
 
     for (int i = 0; i < DIM; i++) {
         if (index[i] < 0 || index[i] >= shape[i]) {
@@ -106,7 +105,7 @@ bool Lattice<T, DIM>::inBounds (const Vector<DIM>& index) const {
 template<typename T, std::size_t DIM>
 bool Lattice<T, DIM>::isomorphic (const Lattice<T, DIM>& other, const std::vector<Matrix<DIM+1>>& transforms) const {
     for (const auto& transform : transforms) {
-        if (*this == transform * other) {
+        if (transform * *this == other) {
             return true;
         }
     }

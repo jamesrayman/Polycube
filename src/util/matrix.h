@@ -37,6 +37,9 @@ public:
     
     Matrix<DIM>& operator= (const Matrix<DIM>&);
 
+    bool operator== (const Matrix<DIM>&) const;
+    bool operator!= (const Matrix<DIM>&) const;
+
     static Matrix<DIM> identity ();
     static Matrix<DIM> planeRotation (int, int, int);
     static std::vector<Matrix<DIM>> allRotations(int);;

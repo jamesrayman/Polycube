@@ -23,6 +23,9 @@ public:
 
     Vector<DIM>& operator= (const Vector<DIM>&);
 
+    bool operator== (const Vector<DIM>&) const;
+    bool operator!= (const Vector<DIM>&) const;
+
     static Vector<DIM> unitAxis (int);
 };
 

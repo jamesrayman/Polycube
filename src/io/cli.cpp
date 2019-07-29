@@ -21,8 +21,7 @@ long long currentTime () {
 }
 
 int main (int argc, char** argv) {
-	
-	auto puzzleData = read::commandLine(argc, argv);
+	//auto puzzleData = read::commandLine(argc, argv);
 	/* auto puzzle = parse::puzzle(puzzleData);
 
 	std::cout << "\nInitiating search for solutions.\n";
@@ -34,12 +33,7 @@ int main (int argc, char** argv) {
 	std::cout << "Search completed in " << endTime - startTime << " milliseconds.\n\n";
 	std::cout << format::solutions(solutions);
 	*/
-
-	Lattice<int, 3> a { { { 1, 2 }, { 1, 1 } }, { { 1, 2 }, { 2, 2 } } };
-	Board<3> b (a);
-	std::vector<Board<3>> s = { b, b };
-
-	std::cout << format::solutions(s);
+	
 
 	return 0;
 }
