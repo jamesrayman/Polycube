@@ -10,7 +10,8 @@ namespace format {
         auto shape = b.shape();
 
         for (const auto& i : b.allPositions()) {
-            res += char(b[i] + ' ');
+            std::string cubeChars = ".@#$%^&*-+=?/~:0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            res += cubeChars[b[i]];
 
             if (i[2] == shape[2] - 1) {
                 if (i[1] == shape[1] - 1) res += "\n";

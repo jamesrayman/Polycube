@@ -21,8 +21,8 @@ long long currentTime () {
 }
 
 int main (int argc, char** argv) {
-	//auto puzzleData = read::commandLine(argc, argv);
-	/* auto puzzle = parse::puzzle(puzzleData);
+	auto puzzleData = read::commandLine(argc, argv);
+	auto puzzle = parse::puzzle(puzzleData);
 
 	std::cout << "\nInitiating search for solutions.\n";
 	
@@ -30,10 +30,8 @@ int main (int argc, char** argv) {
 	auto solutions = puzzle.solve();
 	auto endTime = currentTime();
 
-	std::cout << "Search completed in " << endTime - startTime << " milliseconds.\n\n";
+	std::cout << "Search completed in " << endTime - startTime << " millisecond" << (endTime - startTime == 1 ? "" : "s") << ".\n\n";
 	std::cout << format::solutions(solutions);
-	*/
-	
 
 	return 0;
 }

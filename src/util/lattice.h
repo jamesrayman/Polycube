@@ -23,6 +23,7 @@ protected:
 public:
     Lattice ();
     Lattice (const Lattice&);
+    Lattice (const std::vector<Lattice<T, DIM-1>>&);
     Lattice (const std::initializer_list<Lattice<T, DIM-1>>&);
 
     template<std::size_t N>

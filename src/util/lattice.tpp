@@ -12,6 +12,9 @@ template<typename T, std::size_t DIM>
 Lattice<T, DIM>::Lattice (const Lattice&) = default;
 
 template<typename T, std::size_t DIM>
+Lattice<T, DIM>::Lattice (const std::vector<Lattice<T, DIM-1>>& data) : data(data) {}
+
+template<typename T, std::size_t DIM>
 Lattice<T, DIM>::Lattice (const std::initializer_list<Lattice<T, DIM-1>>& data) : data(data) {}
 
 

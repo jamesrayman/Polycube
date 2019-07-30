@@ -10,8 +10,9 @@ class Puzzle {
 private:
     Board<DIM> board;
     PolycubeList<DIM> polycubes;
+    std::vector<Vector<DIM>> positions;
 
-    void solveStep (std::vector<Board<DIM>>&, int, int) const;
+    void solveStep (std::vector<Board<DIM>>&, Board<DIM>&, int, int, int, int) const;
 public:
     Puzzle ();
     Puzzle (const Puzzle&);
