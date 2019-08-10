@@ -1,7 +1,9 @@
 #include "board.h"
 
 template<std::size_t DIM>
-Board<DIM>::Board () = default;
+Board<DIM>::Board () {
+    nextCube = 1;
+}
 
 template<std::size_t DIM>
 Board<DIM>::Board (const Board& other) = default;
@@ -9,6 +11,7 @@ Board<DIM>::Board (const Board& other) = default;
 template<std::size_t DIM>
 Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) { 
     auto allPos = Lattice<int, DIM>::allPositions();
+    std::unordered_map<int, int> cubeFreq;
 
     for (const auto& i : allPos) {
         int val = Lattice<int, DIM>::at(i);
@@ -17,23 +20,12 @@ Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) {
             cubeFreq[val]++;
         }
     }
-}
 
-template<std::size_t DIM>
-void Board<DIM>::setAt (const Vector<DIM>& index, int val) {
-    auto& cell = (*this)[index];
+    nextCube = 1;
 
-    if (cell != 0) cubeFreq[cell]--;
-    if (val != 0) cubeFreq[val]++;
-
-    cell = val;
-}
-
-template<std::size_t DIM>
-int Board<DIM>::nextUnused () const {
-    int res = 1;
-    while (cubeFreq.count(res) && cubeFreq.at(res) > 0) res++;
-    return res;
+    while (cubeFreq[nextCube] > 0) {
+        nextCube++;
+    }
 }
 
 template<std::size_t DIM>
@@ -47,15 +39,15 @@ bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& tran
         }
     }
 
-    int cubeVal = nextUnused();
-
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;
         
         if (polycube[position]) {
-            setAt(tPosition, cubeVal);
+            (*this)[tPosition] = nextCube;
         }
     }
+
+    nextCube++;
 
     return true;
 }
@@ -68,9 +60,11 @@ void Board<DIM>::unplace (const Polycube<DIM>& polycube, const Matrix<DIM+1>& tr
         auto tPosition = transformation * position;
         
         if (polycube[position]) {
-            setAt(tPosition, 0);
+            (*this)[tPosition] = 0;
         }
     }
+
+    nextCube--;
 }
 
 template<std::size_t DIM>

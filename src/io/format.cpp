@@ -12,7 +12,7 @@ namespace format {
             return std::string() + cubeChars[x];
         }
 
-        return "\033[48;5;" + std::to_string(x) + "m \033[49m";
+        return "\033[48;5;" + std::to_string(x) + "m\033[38;5;" + std::to_string(x) + "m" + cubeChars[x] + "\033[0m";
     }
 
     std::string board (const Board<3>& b) {
@@ -20,7 +20,6 @@ namespace format {
         auto shape = b.shape();
 
         for (const auto& i : b.allPositions()) {
-
             // note: color is not supported on all terminals
             res += cube(b[i], true);
 
@@ -33,7 +32,7 @@ namespace format {
         return res;
     }
 
-    std::string solutions (const std::vector<Board<3>>& solutions) {
+    std::string solutions (const std::vector<Board<3>>& solutions, int solutionLimit) {
         std::string res = "";
         
         if (solutions.size() == 0) {
@@ -47,11 +46,16 @@ namespace format {
         else {
             res += "There are " + std::to_string(solutions.size()) + " solutions, excluding rotations and reflections: \n\n";
 
-            for (int i = 0; i < solutions.size(); i++) {
+            for (int i = 0; i < std::min(solutionLimit, (int) solutions.size()); i++) {
                 res += "Solution #" + std::to_string(i+1) + "\n";
 
                 res += board(solutions[i]) + "\n";
-            } 
+            }
+
+            if (solutions.size() > solutionLimit) {
+                res += "(" + std::to_string(solutions.size() - solutionLimit) + 
+                    " solution" + (solutions.size() - solutionLimit == 1 ? "" : "s") + " omitted for brevity)\n";
+            }
         }
 
         return res;

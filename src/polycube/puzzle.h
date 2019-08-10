@@ -12,11 +12,13 @@ private:
     PolycubeList<DIM> polycubes;
     std::vector<Vector<DIM>> positions;
 
-    void solveStep (std::vector<Board<DIM>>&, Board<DIM>&, int, int, int, int) const;
+    void solveStep (std::vector<Board<DIM>>&, Board<DIM>&, int, int, int, int, int&) const;
 public:
     Puzzle ();
     Puzzle (const Puzzle&);
     Puzzle (const Board<DIM>&, const PolycubeList<DIM>&);
+
+    void initialize ();
 
     std::vector<Board<DIM>> solve () const;
 };

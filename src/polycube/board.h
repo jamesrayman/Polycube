@@ -10,10 +10,7 @@
 template<std::size_t DIM>
 class Board : public Lattice<int, DIM> {
 private:
-    std::unordered_map<int, int> cubeFreq;
-
-    void setAt (const Vector<DIM>&, int);
-    int nextUnused () const;
+    int nextCube;
 
     bool renameEqual (const Board<DIM>&) const;
 
