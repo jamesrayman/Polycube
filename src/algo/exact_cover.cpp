@@ -11,12 +11,17 @@ void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr,
         return;
     }
     
-    int colToFill = chain.mostConstrained();
+    int cellToFill = chain.mostConstrained();
 
-    for (int cand = chain.down(colToFill, 0); cand != 0; cand = chain.down(colToFill, cand)) {
+    for (int cand = chain.down(cellToFill, 0); cand != 0; cand = chain.down(cellToFill, cand)) {
         curr.push_back(cand);
         chain.startUndoBatch();
         
+        for (int candCell = chain.right(cellToFill, cand); chain.active(cellToFill, cand); candCell = chain.right(cellToFill, cand)) {
+            for (int candToRemove = chain.down(cellToFill, candCell); chain.active(cellToFill, candCell); candToRemove = chain.down(cellToFill, candCell)) {
+                chain.deactivate(candCell, candToRemove);
+            }
+        }
 
         stepExactCover (res, curr, chain);
 

@@ -42,10 +42,23 @@ int main (int argc, char** argv) {
 }
 */
 
-#include "../algo/dancing_chain.h"
+#include "../algo/exact_cover.h"
 
 int main (int argc, char** argv) {
+	std::cout << "afdas";
 	
+	auto s = exactCover({
+		{ 1, 1, 0 },
+		{ 0, 1, 1 },
+		{ 0, 0, 1 }
+	});
+
+	for (auto& v : s) {
+		for (auto& x : v) {
+			std::cout << x << " ";
+		}
+		std::cout << "\n";
+	}
 	
 	return 0;
 }

@@ -8,4 +8,4 @@ bin/cli: $(obj)
 
 .PHONY: clean
 clean:
-	rm -f $(obj) polycube
+	rm -f $(obj) bin/cli

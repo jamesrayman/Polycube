@@ -5,41 +5,33 @@
 class DancingChain;
 
 class DancingLink {
+    friend class DancingChain;
 private:
     DancingChain& chain;
 
-    int indexUp, indexDown, indexLeft, indexRight;
-    bool isActive;
+    int up, down, left, right;
+    bool active;
+    int col, row;
+    int size;
 public:
-    const int col, row;
-    int data;
-
     DancingLink () = delete;
-    DancingLink (const DancingLink&);
-    DancingLink (DancingChain&, int, int, int);
-
-    bool active () const;
+    DancingLink (const DancingLink&) = default;
+    DancingLink (DancingChain&, int, int, bool);
     
     void deactivate ();
     void reactivate ();
-
-    int up () const;
-    int down () const;
-    int left () const;
-    int right () const;
-
-    bool operator== (const DancingLink&) const;
-    bool operator!= (const DancingLink&) const;
 };
 
 class DancingChain {
+    friend class DancingLink;
 private:
-    DancingLink term;
-    std::vector<DancingLink> cols;
     std::vector<std::vector<DancingLink>> links;
-    int colsActive;
+    int cellsActive;
     
     std::vector<int> history;
+
+    DancingLink& at (int, int);
+    const DancingLink& at (int, int) const;
 public:
     DancingChain ();
     DancingChain (const DancingChain&);
@@ -49,6 +41,7 @@ public:
     void batchUndo ();
     void startUndoBatch ();
 
+    bool active (int, int) const;
     void deactivate (int, int);
 
     int up (int, int) const;
@@ -58,9 +51,4 @@ public:
 
     int mostConstrained () const;
     int size () const;
-
-    int front () const;
-    bool inRange (int) const;
-
-    DancingLink& operator[] (int);
 };
