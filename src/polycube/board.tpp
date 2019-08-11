@@ -29,15 +29,29 @@ Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) {
 }
 
 template<std::size_t DIM>
-bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
+bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
     auto allPositions = polycube.allPositions();
-
+    
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;
         if (polycube[position] && (!Lattice<int, DIM>::inBounds(tPosition) || (*this)[tPosition] != 0)) {
             return false;
         }
     }
+
+    return true;
+}
+
+template<std::size_t DIM>
+void Board<DIM>::put (int index, int value) {
+    (*this)[this->vectorIndex(index)] = value;
+}
+
+template<std::size_t DIM>
+bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
+    auto allPositions = polycube.allPositions();
+
+    if (!fits(polycube, transformation)) return false;
 
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;

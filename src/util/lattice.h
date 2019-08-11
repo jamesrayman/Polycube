@@ -29,6 +29,7 @@ public:
     template<std::size_t N>
     Lattice (const Vector<N>&, const T& = T());
 
+    int size () const;
     int dimension () const;
     Vector<DIM> shape () const;
     Matrix<DIM+1> properTransformation (const Matrix<DIM+1>&) const;
@@ -37,6 +38,9 @@ public:
     bool inBounds (const Vector<DIM>&) const;
     bool isomorphic (const Lattice<T, DIM>&, const std::vector<Matrix<DIM+1>>&) const;
 
+    int intIndex (const Vector<DIM>&) const;
+    Vector<DIM> vectorIndex (int) const;
+    
     T& operator[] (const Vector<DIM>&);
     const T& operator[] (const Vector<DIM>&) const;
 

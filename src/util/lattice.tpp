@@ -36,6 +36,18 @@ int Lattice<T, DIM>::dimension () const {
 }
 
 template<typename T, std::size_t DIM>
+int Lattice<T, DIM>::size () const {
+    auto shape = this->shape();
+    int res = 1;
+
+    for (int i = 0; i < DIM; i++) {
+        res *= shape[i];
+    }
+
+    return res;
+}
+
+template<typename T, std::size_t DIM>
 Vector<DIM> Lattice<T, DIM>::shape () const {
     Vector<DIM> res;
     res[0] = data.size();
@@ -113,6 +125,32 @@ bool Lattice<T, DIM>::isomorphic (const Lattice<T, DIM>& other, const std::vecto
         }
     }
     return false;
+}
+
+template<typename T, std::size_t DIM>
+int Lattice<T, DIM>::intIndex (const Vector<DIM>& index) const {
+    int res = 0;
+    auto shape = this->shape();
+
+    for (int i = 0; i < DIM; i++) {
+        res *= shape[i];
+        res += index[i];
+    }
+
+    return res;
+}
+
+template<typename T, std::size_t DIM>
+Vector<DIM> Lattice<T, DIM>::vectorIndex (int index) const {
+    Vector<DIM> res;
+    auto shape = this->shape();
+
+    for (int i = DIM-1; i >= 0; i--) {
+        res[i] = index % shape[i];
+        index /= shape[i];
+    }
+
+    return res;
 }
 
 template<typename T, std::size_t DIM>

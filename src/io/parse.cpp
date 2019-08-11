@@ -139,14 +139,16 @@ namespace parse {
         return Board<3>(Lattice<int, 3>(Vector<3>{ x, y, z }, 0));
     }
     
-    PolycubeList<3> polycubeList (const std::string& data, const std::unordered_map<std::string, Polycube<3>>& polycubeMap) {
-        PolycubeList<3> res;
+    std::vector<Polycube<3>> polycubeList (const std::string& data, const std::unordered_map<std::string, Polycube<3>>& polycubeMap) {
+        std::vector<Polycube<3>> res;
         std::stringstream stream (data);
         std::string name;
         int times;
 
         while (stream >> name >> times) {
-            res.push(polycubeMap.at(name), times);
+            for (int i = 0; i < times; i++) {
+                res.push_back(polycubeMap.at(name));
+            }
         }
 
         return res;

@@ -57,11 +57,13 @@ DancingChain::DancingChain (const std::vector<std::vector<char>>& candidates) {
                 initCol = prevCol = col;
             }
             else {
+                if (at(prevCol, row).right != -1) break;
+
                 at(prevCol, row).right = col;
                 at(col, row).left = prevCol;
-            }
 
-            if (col == initCol) break;
+                prevCol = col;
+            }
         }
     }
 
@@ -78,12 +80,14 @@ DancingChain::DancingChain (const std::vector<std::vector<char>>& candidates) {
                 initRow = prevRow = row;
             }
             else {
+                if (at(col, prevRow).down != -1) break;
+
                 at(col, prevRow).down = row;
                 at(col, row).up = prevRow;
                 at(col, 0).size++;
-            }
 
-            if (row == initRow) break;
+                prevRow = row;
+            }
         }
     }
 }
@@ -104,12 +108,11 @@ void DancingChain::undo () {
     links[col][row].reactivate();
 }
 void DancingChain::batchUndo () {
-    while (!history.empty() && history.back() != -1) {
+    while (history.back() != -1) {
         undo();
     }
-    if (!history.empty()) {
-        history.pop_back();
-    }
+    
+    history.pop_back();
 }
 void DancingChain::startUndoBatch () {
     history.push_back(-1);
@@ -121,6 +124,8 @@ bool DancingChain::active (int col, int row) const {
 void DancingChain::deactivate (int col, int row) {
     history.push_back(col);
     history.push_back(row);
+
+    at(col, row).deactivate();
 }
 
 int DancingChain::up (int col, int row) const {

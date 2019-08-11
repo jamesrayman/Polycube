@@ -26,6 +26,8 @@ public:
     Board (const Board&);
     Board (const Lattice<int, DIM>&);
 
+    bool fits (const Polycube<DIM>&, const Matrix<DIM+1>&);
+    void put (int, int);
     bool place (const Polycube<DIM>&, const Matrix<DIM+1>&);
     void unplace (const Polycube<DIM>&, const Matrix<DIM+1>&);
     Board<DIM> transform (const Matrix<DIM+1>&) const;
