@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../polycube/board.h"
+#include "board.h"
 
 namespace format {
     std::string cube (int x, bool color) {

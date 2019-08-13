@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 
-#include "../polycube/puzzle.h"
+#include "puzzle.h"
 
 #include "read.h"
 #include "parse.h"

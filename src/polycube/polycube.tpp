@@ -1,8 +1,8 @@
 #include "polycube.h"
 
-#include "../util/vector.h"
-#include "../util/matrix.h"
-#include "../util/lattice.h"
+#include "vector.h"
+#include "matrix.h"
+#include "lattice.h"
 
 template<std::size_t DIM>
 Polycube<DIM>::Polycube () : rotations{ Matrix<DIM+1>::identity() } { }

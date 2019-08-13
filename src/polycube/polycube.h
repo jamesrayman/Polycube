@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "../util/vector.h"
-#include "../util/matrix.h"
-#include "../util/lattice.h"
+#include "vector.h"
+#include "matrix.h"
+#include "lattice.h"
 
 template<std::size_t DIM>
 class Polycube : public Lattice<bool, DIM> {

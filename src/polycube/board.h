@@ -3,8 +3,8 @@
 #include <vector>
 #include <unordered_map>
 
-#include "../util/vector.h"
-#include "../util/lattice.h"
+#include "vector.h"
+#include "lattice.h"
 #include "polycube.h"
 
 template<std::size_t DIM>

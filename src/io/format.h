@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "../polycube/board.h"
+#include "board.h"
 
 namespace format {
     std::string cube (int, bool);

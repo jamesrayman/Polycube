@@ -5,9 +5,9 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#include "../polycube/polycube.h"
-#include "../polycube/board.h"
-#include "../polycube/puzzle.h"
+#include "polycube.h"
+#include "board.h"
+#include "puzzle.h"
 
 namespace parse {
     Puzzle<3> puzzle (const std::string&);

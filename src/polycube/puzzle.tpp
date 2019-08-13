@@ -1,7 +1,7 @@
 #include "puzzle.h"
 
-#include "../io/format.h"
-#include "../algo/exact_cover.h"
+#include "format.h"
+#include "exact_cover.h"
 
 template<std::size_t DIM>
 Puzzle<DIM>::Puzzle () = default;
