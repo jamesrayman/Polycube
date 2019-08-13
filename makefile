@@ -2,13 +2,13 @@ src = $(wildcard src/**/*.cpp)
 dirs = $(wildcard src/**/)
 obj = $(src:.cpp=.o)
 
-LDFLAGS = -std=c++17
+LDFLAGS = -std=c++17 -O2
 
 bin/cli: $(obj)
 	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -o $@ $^ $(LDFLAGS)
 
 %.o : %.cpp
-	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -c -o $@ $^
+	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -c -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean test clear
 clean:
