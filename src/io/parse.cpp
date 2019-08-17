@@ -143,12 +143,9 @@ namespace parse {
         std::vector<Polycube<3>> res;
         std::stringstream stream (data);
         std::string name;
-        int times;
 
-        while (stream >> name >> times) {
-            for (int i = 0; i < times; i++) {
-                res.push_back(polycubeMap.at(name));
-            }
+        while (stream >> name) {
+            res.push_back(polycubeMap.at(name));
         }
 
         return res;
