@@ -13,6 +13,8 @@ void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr,
         return;
     }
 
+    if (res.size() > 100) return;
+
     int cellToFill = chain.mostConstrained();
     for (int cand = chain.down(cellToFill, 0); cand != 0; cand = chain.down(cellToFill, cand)) {
         curr.push_back(cand-1);

@@ -134,7 +134,7 @@ namespace parse {
         std::stringstream stream (data);
 
         int x, y, z;
-        stream >> x >> y >> z;
+        stream >> z >> x >> y;
 
         return Board<3>(Lattice<int, 3>(Vector<3>{ x, y, z }, 0));
     }
