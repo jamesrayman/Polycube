@@ -10,6 +10,8 @@
 void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr, DancingChain& chain, int& z) {
     if (chain.size() == 0) {
         res.push_back(curr);
+        std::sort(res.back().begin(), res.back().end());
+
         return;
     }
 
