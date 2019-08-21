@@ -35,7 +35,7 @@ namespace parse {
         auto dataSections = split(data, '#');
 
         if (dataSections.size() < 4) {
-            return Puzzle<3>();
+            throw std::string("Too few sections in puzzle specification.\n");
         }
 
         std::unordered_set<std::string> importedFiles;
@@ -147,6 +147,10 @@ namespace parse {
 
         while (stream >> name) {
             for (char& c : name) c = std::tolower(c);
+            if (polycubeMap.count(name) == 0) {
+                throw std::string("Polycube \"") + name + "\" not found.\n";
+            }
+
             res.push_back(polycubeMap.at(name));
         }
 

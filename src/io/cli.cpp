@@ -14,8 +14,15 @@ long long currentTime () {
 }
 
 int main (int argc, char** argv) {
-	auto puzzleData = read::commandLine(argc, argv);
-	auto puzzle = parse::puzzle(puzzleData);
+	Puzzle<3> puzzle;
+
+	try {
+		puzzle = parse::puzzle(read::commandLine(argc, argv));
+	}
+	catch (std::string exception) {
+		std::cout << exception;
+		return 0;
+	}
 
 	std::cout << "\nInitiating search for solutions.\n";
 
