@@ -1,6 +1,6 @@
 ./dat/tetra.cube
 ./dat/penta.cube
-%
+#
 1
 x
 
@@ -13,5 +13,5 @@ xxx
 3V
 x.
 xx
-%
+#
 

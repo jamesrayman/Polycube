@@ -1,6 +1,6 @@
 ./test/import1.cube
 
-%
+#
 
 T
 xxx
@@ -15,4 +15,4 @@ L
 x x x
 
 
-%
+#

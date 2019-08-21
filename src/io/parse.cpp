@@ -32,7 +32,7 @@ namespace parse {
     }
 
     Puzzle<3> puzzle (const std::string& data) {
-        auto dataSections = split(data, '%');
+        auto dataSections = split(data, '#');
 
         if (dataSections.size() < 4) {
             return Puzzle<3>();
@@ -58,7 +58,7 @@ namespace parse {
             if (visited.count(file)) continue;
             visited.insert(file);
 
-            auto dataSections = split(read::file(file), '%');
+            auto dataSections = split(read::file(file), '#');
 
             if (dataSections.size() >= 1) {
                 auto segment = import(dataSections[0], visited);

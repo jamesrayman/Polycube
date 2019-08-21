@@ -1,12 +1,12 @@
 ./test/import1.cube
 ./test/import2.cube
-%
+#
 ..
 x.x
-%
+#
 4 4 1
-%
+#
 I
 .. ..
 O O
-%
+#

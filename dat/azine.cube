@@ -1,8 +1,8 @@
 ./dat/41.cube
-%
-%
+#
+#
 5 5 4
-%
+#
 3V
 
 4I 4T 4L 4Z 4O
@@ -11,4 +11,4 @@
 5V 5Z 5N 5W 5QQ
 5LV 5VV 5SV 5JJ 5TL
 5TT 5SS 5VS
-%
+#
