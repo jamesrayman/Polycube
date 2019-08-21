@@ -85,6 +85,7 @@ namespace parse {
 
             if (name == "") {
                 stream >> name;
+                for (char& c : name) c = std::tolower(c);
             }
             else if (stream >> nil) {
                 cubeData += line + "\n";
@@ -145,6 +146,7 @@ namespace parse {
         std::string name;
 
         while (stream >> name) {
+            for (char& c : name) c = std::tolower(c);
             res.push_back(polycubeMap.at(name));
         }
 
