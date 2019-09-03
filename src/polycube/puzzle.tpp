@@ -45,7 +45,7 @@ void Puzzle<DIM>::initialize () {
 }
 
 template<std::size_t DIM>
-std::vector<Board<DIM>> Puzzle<DIM>::solve () const {
+std::vector<Board<DIM>> Puzzle<DIM>::solve (int solutionLimit) const {
     std::vector<Board<DIM>> res;
 
     auto solutions = exactCover(candidates);

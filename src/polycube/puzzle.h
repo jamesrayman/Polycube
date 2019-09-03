@@ -21,7 +21,7 @@ public:
 
     void initialize ();
 
-    std::vector<Board<DIM>> solve () const;
+    std::vector<Board<DIM>> solve (int) const;
 };
 
 #include "puzzle.tpp"

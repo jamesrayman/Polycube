@@ -12,8 +12,6 @@ class Board : public Lattice<int, DIM> {
 private:
     int nextCube;
 
-    bool renameEqual (const Board<DIM>&) const;
-
     using Lattice<int, DIM>::transform;
     using Lattice<int, DIM>::isomorphic;
 
@@ -30,8 +28,6 @@ public:
     void put (int, int);
     bool place (const Polycube<DIM>&, const Matrix<DIM+1>&);
     void unplace (const Polycube<DIM>&, const Matrix<DIM+1>&);
-    Board<DIM> transform (const Matrix<DIM+1>&) const;
-    bool isomorphic (const Board<DIM>&, const std::vector<Matrix<DIM+1>>&) const; 
 
     bool operator== (const Board<DIM>&) const;
     bool operator!= (const Board<DIM>&) const;

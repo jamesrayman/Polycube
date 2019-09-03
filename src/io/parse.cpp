@@ -2,8 +2,10 @@
 
 #include <sstream>
 #include <vector>
+#include <regex>
 
 #include "read.h"
+#include "exceptions.h"
 
 namespace parse {
     std::vector<std::string> split (const std::string& data, char split) {
@@ -85,6 +87,11 @@ namespace parse {
 
             if (name == "") {
                 stream >> name;
+
+                if (!std::regex_match(name, std::regex("[A-Za-z0-9]"))) {
+                    throw "Bad name";
+                }
+
                 for (char& c : name) c = std::tolower(c);
             }
             else if (stream >> nil) {

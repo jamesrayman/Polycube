@@ -1,6 +1,7 @@
 #include "cli.h"
 
 #include <iostream>
+#include <exception>
 #include <chrono>
 
 #include "puzzle.h"
@@ -15,12 +16,13 @@ long long currentTime () {
 
 int main (int argc, char** argv) {
 	Puzzle<3> puzzle;
+	int solutionLimit, printLimit;
 
 	try {
-		puzzle = parse::puzzle(read::commandLine(argc, argv));
+		puzzle = parse::puzzle(read::commandLine(argc, argv, solutionLimit, printLimit));
 	}
-	catch (std::string exception) {
-		std::cout << exception;
+	catch (std::exception& e) {
+		std::cout << e.what();
 		return 1;
 	}
 
@@ -31,11 +33,11 @@ int main (int argc, char** argv) {
 	std::cout << "Searching...\n";
 	
 	auto startTime = currentTime();
-	auto solutions = puzzle.solve();
+	auto solutions = puzzle.solve(solutionLimit);
 	auto endTime = currentTime();
 
 	std::cout << "Search completed in " << format::countable(endTime - startTime, "millisecond") << ".\n\n";
-	std::cout << format::solutions(solutions, 10);
+	std::cout << format::solutions(solutions, printLimit);
 
 	return 0;
 }

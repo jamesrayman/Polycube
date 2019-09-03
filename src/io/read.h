@@ -4,5 +4,5 @@
 
 namespace read {
     std::string file (const std::string&);
-    std::string commandLine (int, char**);
+    std::string commandLine (int, char**, int&, int&);
 }

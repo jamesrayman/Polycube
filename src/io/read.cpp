@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "exceptions.h"
+
 namespace read {
     std::string file (const std::string& fileName) {
         std::ifstream file (fileName);
@@ -19,7 +21,7 @@ namespace read {
         return res;
     }
 
-    std::string commandLine (int argc, char** argv) {
+    std::string commandLine (int argc, char** argv, int& solutionLimit, int& printLimit) {
         if (argc < 2) {
             throw std::string("Usage:   ") + argv[0] + " [-cnf] [SOLUTIONLIMIT] FILENAME\n";
         }

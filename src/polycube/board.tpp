@@ -82,50 +82,8 @@ void Board<DIM>::unplace (const Polycube<DIM>& polycube, const Matrix<DIM+1>& tr
 }
 
 template<std::size_t DIM>
-Board<DIM> Board<DIM>::transform (const Matrix<DIM+1>& transformation) const {
-    return Board<DIM>(Lattice<int, DIM>::transform(transformation));
-}
-
-template<std::size_t DIM>
-bool Board<DIM>::renameEqual (const Board<DIM>& other) const {
-    if (this->shape() != other.shape()) return false;
-
-    auto allPositions = this->allPositions();
-    std::unordered_map<int, int> corresp;
-    std::unordered_map<int, int> invCorresp;
-    corresp[0] = 0;
-    invCorresp[0] = 0;
-
-    for (const auto& position : allPositions) {
-        int cube = (*this)[position], otherCube = other[position];
-
-        if (corresp.count(cube)) {
-            if (corresp[cube] != otherCube) return false;
-        }
-        else {
-            if (invCorresp.count(otherCube)) return false;
-
-            corresp[cube] = otherCube;
-            invCorresp[otherCube] = cube;
-        }
-    }
-
-    return true;
-}
-
-template<std::size_t DIM>
-bool Board<DIM>::isomorphic (const Board<DIM>& other, const std::vector<Matrix<DIM+1>>& transforms) const {
-    for (const auto& transform : transforms) {
-        if (other.renameEqual(transform * *this)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-template<std::size_t DIM>
 bool Board<DIM>::operator== (const Board<DIM>& other) const {
-    return isomorphic(other, Matrix<DIM+1>::allRotations(DIM));
+    return false;
 }
 
 template<std::size_t DIM>
