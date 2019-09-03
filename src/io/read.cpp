@@ -21,7 +21,7 @@ namespace read {
 
     std::string commandLine (int argc, char** argv) {
         if (argc < 2) {
-            throw std::string("Usage:   ") + argv[0] + " [-cn] [SOLUTIONLIMIT] FILENAME\n";
+            throw std::string("Usage:   ") + argv[0] + " [-cnf] [SOLUTIONLIMIT] FILENAME\n";
         }
         else if (argc == 2) {
             return file(std::string(argv[1]));

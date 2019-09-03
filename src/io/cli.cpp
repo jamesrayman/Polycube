@@ -21,7 +21,7 @@ int main (int argc, char** argv) {
 	}
 	catch (std::string exception) {
 		std::cout << exception;
-		return 0;
+		return 1;
 	}
 
 	std::cout << "\nInitiating search for solutions.\n";
@@ -34,7 +34,7 @@ int main (int argc, char** argv) {
 	auto solutions = puzzle.solve();
 	auto endTime = currentTime();
 
-	std::cout << "Search completed in " << endTime - startTime << " millisecond" << (endTime - startTime == 1 ? "" : "s") << ".\n\n";
+	std::cout << "Search completed in " << format::countable(endTime - startTime, "millisecond") << ".\n\n";
 	std::cout << format::solutions(solutions, 10);
 
 	return 0;

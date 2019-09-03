@@ -5,6 +5,19 @@
 #include "board.h"
 
 namespace format {
+    std::string countable (int n, std::string thing, std::string things) {
+        if (n == 1) {
+            return std::to_string(n) + " " + thing;
+        }
+        else {
+            return std::to_string(n) + " " + things;
+        }
+    }
+
+    std::string countable (int n, std::string thing) {
+        return countable(n, thing, thing + "s");
+    }
+
     std::string cube (int x, bool color) {
         std::string cubeChars = ".@#$%^&*-+=?/~:0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -32,7 +45,7 @@ namespace format {
         return res;
     }
 
-    std::string solutions (const std::vector<Board<3>>& solutions, int solutionLimit) {
+    std::string solutions (const std::vector<Board<3>>& solutions, int printLimit) {
         std::string res = "";
         
         if (solutions.size() == 0) {
@@ -44,17 +57,16 @@ namespace format {
             res += board(solutions[0]);
         }
         else {
-            res += "There are " + std::to_string(solutions.size()) + " solutions, excluding rotations and reflections: \n\n";
+            res += "There are " + format::countable(solutions.size(), "solution") + ", excluding rotations and reflections: \n\n";
 
-            for (int i = 0; i < std::min(solutionLimit, (int) solutions.size()); i++) {
+            for (int i = 0; i < std::min(printLimit, (int) solutions.size()); i++) {
                 res += "Solution #" + std::to_string(i+1) + "\n";
 
                 res += board(solutions[i]) + "\n";
             }
 
-            if (solutions.size() > solutionLimit) {
-                res += "(" + std::to_string(solutions.size() - solutionLimit) + 
-                    " solution" + (solutions.size() - solutionLimit == 1 ? "" : "s") + " omitted for brevity)\n";
+            if (solutions.size() > printLimit) {
+                res += "(" + format::countable(solutions.size() - printLimit, "solution") + " omitted for brevity)\n";
             }
         }
 
