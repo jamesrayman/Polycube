@@ -1,5 +1,7 @@
 # Polycube
-A generator of polycube packing puzzles
+A solver of polycube packing puzzles, such as the one below:
+
+\[INSERT IMAGE HERE\]
 
 ## Usage
 
@@ -13,9 +15,9 @@ where `PUZZLE` is the file containing the puzzle specification.
 
 `-c`: output solutions with color
 
-`-n SOLUTIONLIMIT`: stop counting solutions at `SOLUTIONLIMIT`
+`-n SOLUTIONLIMIT`: stop counting solutions at `SOLUTIONLIMIT`, default is infinity
 
-`-p PRINTLIMIT`: print no more than `PRINTLIMIT` solutions
+`-p PRINTLIMIT`: print no more than `PRINTLIMIT` solutions, default is 10
 
 ## Puzzle Specification
 
