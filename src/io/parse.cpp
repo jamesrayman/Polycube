@@ -37,7 +37,7 @@ namespace parse {
         auto dataSections = split(data, '#');
 
         if (dataSections.size() < 4) {
-            throw std::string("Too few sections in puzzle specification.\n");
+            throw err::PuzzleFormat("too few sections");
         }
 
         std::unordered_set<std::string> importedFiles;
@@ -57,7 +57,7 @@ namespace parse {
         auto files = split(data);
 
         for (const auto& file : files) {
-            if (visited.count(file)) continue;
+            if (file == "" || visited.count(file)) continue;
             visited.insert(file);
 
             auto dataSections = split(read::file(file), '#');
@@ -88,13 +88,13 @@ namespace parse {
             if (name == "") {
                 stream >> name;
 
-                if (!std::regex_match(name, std::regex("[A-Za-z0-9]"))) {
-                    throw "Bad name";
+                if (!std::regex_match(name, std::regex("[A-Za-z0-9]*"))) {
+                    throw err::PolycubeName(name);
                 }
 
                 for (char& c : name) c = std::tolower(c);
             }
-            else if (stream >> nil) {
+            else if (stream >> nil) { // if the line is not empty
                 cubeData += line + "\n";
             }
             else {
@@ -150,15 +150,17 @@ namespace parse {
     std::vector<Polycube<3>> polycubeList (const std::string& data, const std::unordered_map<std::string, Polycube<3>>& polycubeMap) {
         std::vector<Polycube<3>> res;
         std::stringstream stream (data);
-        std::string name;
+        std::string name, lowerName;
 
         while (stream >> name) {
-            for (char& c : name) c = std::tolower(c);
-            if (polycubeMap.count(name) == 0) {
-                throw std::string("Polycube \"") + name + "\" not found.\n";
+            lowerName = name;
+            for (char& c : lowerName) c = std::tolower(c);
+            
+            if (polycubeMap.count(lowerName) == 0) {
+                throw err::PolycubeNotFound(name);
             }
 
-            res.push_back(polycubeMap.at(name));
+            res.push_back(polycubeMap.at(lowerName));
         }
 
         return res;

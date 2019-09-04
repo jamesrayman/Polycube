@@ -16,13 +16,14 @@ long long currentTime () {
 
 int main (int argc, char** argv) {
 	Puzzle<3> puzzle;
-	int solutionLimit, printLimit;
+	int solutionLimit = 100, printLimit = 10;
 
 	try {
 		puzzle = parse::puzzle(read::commandLine(argc, argv, solutionLimit, printLimit));
 	}
 	catch (std::exception& e) {
 		std::cout << e.what();
+		std::cout << "Solution search aborted.\n";
 		return 1;
 	}
 
@@ -37,7 +38,7 @@ int main (int argc, char** argv) {
 	auto endTime = currentTime();
 
 	std::cout << "Search completed in " << format::countable(endTime - startTime, "millisecond") << ".\n\n";
-	std::cout << format::solutions(solutions, printLimit);
+	std::cout << format::solutions(solutions, solutionLimit, printLimit);
 
 	return 0;
 }

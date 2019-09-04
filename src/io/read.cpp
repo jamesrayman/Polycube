@@ -12,7 +12,7 @@ namespace read {
         std::string res, line;
 
         if (!file.good()) {
-            throw std::string("File \"") + fileName + "\" does not exist.\n"; 
+            throw err::FileNotFound(fileName); 
         }
 
         while (std::getline(file, line)) {
@@ -23,7 +23,7 @@ namespace read {
 
     std::string commandLine (int argc, char** argv, int& solutionLimit, int& printLimit) {
         if (argc < 2) {
-            throw std::string("Usage:   ") + argv[0] + " [-cnf] [SOLUTIONLIMIT] FILENAME\n";
+            throw err::CliOptions(argv[0]);
         }
         else if (argc == 2) {
             return file(std::string(argv[1]));

@@ -33,7 +33,6 @@ namespace format {
         auto shape = b.shape();
 
         for (const auto& i : b.allPositions()) {
-            // note: color is not supported on all terminals
             res += cube(b[i], true);
 
             if (i[2] == shape[2] - 1) {
@@ -45,28 +44,35 @@ namespace format {
         return res;
     }
 
-    std::string solutions (const std::vector<Board<3>>& solutions, int printLimit) {
+    std::string solutions (const std::vector<Board<3>>& solutions, int solutionLimit, int printLimit) {
         std::string res = "";
+        int solutionsToCount = std::min((int)solutions.size(), solutionLimit);
+        int solutionsToPrint = std::min((int)solutions.size(), printLimit);
         
         if (solutions.size() == 0) {
             res += "There are no solutions.\n";
         }
         else if (solutions.size() == 1) {
-            res += "There is 1 solution, excluding rotations and reflections: \n\n";
+            res += "There is ";
+            if (solutionsToCount != solutions.size()) res += "at least ";
+            res += " 1 solution, excluding rotations and reflections: \n\n";
         
             res += board(solutions[0]);
         }
         else {
-            res += "There are " + format::countable(solutions.size(), "solution") + ", excluding rotations and reflections: \n\n";
+            res += "There are ";
+            if (solutionsToCount != solutions.size()) res += "at least ";
+            res += format::countable(solutionsToCount, "solution");
+            res += ", excluding rotations and reflections: \n\n";
 
-            for (int i = 0; i < std::min(printLimit, (int) solutions.size()); i++) {
+            for (int i = 0; i < solutionsToPrint; i++) {
                 res += "Solution #" + std::to_string(i+1) + "\n";
 
                 res += board(solutions[i]) + "\n";
             }
 
-            if (solutions.size() > printLimit) {
-                res += "(" + format::countable(solutions.size() - printLimit, "solution") + " omitted for brevity)\n";
+            if (solutionsToCount > solutionsToPrint) {
+                res += "(" + format::countable(solutionsToCount - solutionsToPrint, "solution") + " omitted for brevity)\n";
             }
         }
 
