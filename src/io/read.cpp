@@ -1,6 +1,7 @@
 #include "read.h"
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
@@ -21,21 +22,52 @@ namespace read {
         return res;
     }
 
-    std::string commandLine (int argc, char** argv, int& solutionLimit, int& printLimit) {
-        if (argc < 2) {
-            throw err::CliOptions(argv[0]);
+    std::string commandLine (int argc, char** argv, bool& color, int& solutionLimit, int& printLimit) {
+        std::vector<std::string> args;
+        std::string fileContents = "";
+        bool fileFound = false;
+
+        for (int i = 0; i < argc; i++) {
+            args.push_back(argv[i]);
         }
-        else if (argc == 2) {
-            return file(std::string(argv[1]));
+        
+        for (int i = 1; i < argc; i++) {
+            if (args[i][0] == '-') {
+                if (args[i] == "-c") {
+                    color = true;
+                }
+                else if (args[i] == "-n" && i+1 < argc) {
+                    i++;
+                    try {
+                        solutionLimit = std::stoi(args[i]);
+                    }
+                    catch (...) {
+                        throw err::CliOptions(args[0]);
+                    }
+                }
+                else if (args[i] == "-p" && i+1 < argc) {
+                    i++;
+                    try {
+                        printLimit = std::stoi(args[i]);
+                    }
+                    catch (...) {
+                        throw err::CliOptions(args[0]);
+                    }
+                }
+                else throw err::CliOptions(args[0]);;
+            }
+            else {
+                if (fileFound) throw err::CliOptions(args[0]);
+
+                fileFound = true;
+                fileContents = file(args[i]);
+            }            
         }
-        else {
-            std::string flags (argv[1]);
 
-            
+        if (!fileFound) throw err::CliOptions(args[0]);
 
-            return file(std::string(argv[2]));
-        }
+        printLimit = std::min(printLimit, solutionLimit);
 
-
+        return fileContents;
     }
 }

@@ -46,10 +46,11 @@ namespace parse {
         auto segment = polycubes(dataSections[1]);
         polycubeMap.insert(segment.begin(), segment.end());
 
-        auto puzzleBoard = board(dataSections[2]);
+        int sturdyLayers;
+        auto puzzleBoard = board(dataSections[2], sturdyLayers);
         auto puzzleCubes = polycubeList(dataSections[3], polycubeMap);
 
-        return Puzzle<3>(puzzleBoard, puzzleCubes);
+        return Puzzle<3>(puzzleBoard, puzzleCubes, sturdyLayers);
     }
 
     std::unordered_map<std::string, Polycube<3>> import (const std::string& data, std::unordered_set<std::string>& visited) {
@@ -138,11 +139,15 @@ namespace parse {
         return Polycube<3>(Lattice<bool, 3>(cube));
     }
     
-    Board<3> board (const std::string& data) {
+    Board<3> board (const std::string& data, int& sturdyLayers) {
         std::stringstream stream (data);
 
         int x, y, z;
         stream >> z >> x >> y;
+
+        if (!(stream >> sturdyLayers)) {
+            sturdyLayers = y;
+        }
 
         return Board<3>(Lattice<int, 3>(Vector<3>{ x, y, z }, 0));
     }

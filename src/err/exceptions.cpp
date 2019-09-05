@@ -6,7 +6,7 @@ namespace err {
     }
 
     CliOptions::CliOptions (const std::string& arg) {
-        message = "Usage: " + arg + " [-c] [-n SOLUTIONLIMIT] [-p PRINTLIMIT] PUZZLE\n";
+        message = "Usage: " + arg + " [-c] [-n SOLUTIONLIMIT] [-p PRINTLIMIT] PUZZLEFILE\n";
     }
     
     FileNotFound::FileNotFound (const std::string& file) {

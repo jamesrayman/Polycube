@@ -7,17 +7,16 @@
 template<std::size_t DIM>
 class Puzzle {
 private:
+    int sturdyLayers;
     Board<DIM> board;
     std::vector<Polycube<DIM>> polycubes;
     std::vector<std::vector<char>> candidates;
 
     int nBoardCells, nCells;
-
-    void solveStep (std::vector<Board<DIM>>&, Board<DIM>&, int, int, int, int, int&) const;
 public:
     Puzzle ();
     Puzzle (const Puzzle&);
-    Puzzle (const Board<DIM>&, const std::vector<Polycube<DIM>>&);
+    Puzzle (const Board<DIM>&, const std::vector<Polycube<DIM>>&, int);
 
     void initialize ();
 

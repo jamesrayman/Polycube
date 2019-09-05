@@ -6,16 +6,16 @@ A solver of polycube packing puzzles, such as the one below:
 ## Usage
 
 ```
-polycube [-c] [-n SOLUTIONLIMIT] [-p PRINTLIMIT] PUZZLE
+polycube [-c] [-n SOLUTIONLIMIT] [-p PRINTLIMIT] PUZZLEFILE
 ```
 
-where `PUZZLE` is the file containing the puzzle specification.
+where `PUZZLEFILE` is the file containing the puzzle specification.
 
 ### Flags
 
 `-c`: output solutions with color (not supported on all terminals)
 
-`-n SOLUTIONLIMIT`: stop counting solutions at `SOLUTIONLIMIT`, enter a negative number for infinity, default is 100
+`-n SOLUTIONLIMIT`: stop counting solutions at `SOLUTIONLIMIT`, enter a nonpositive number for infinity, default is 100
 
 `-p PRINTLIMIT`: print no more than `PRINTLIMIT` solutions, default is 10
 

@@ -29,7 +29,7 @@ Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) {
 }
 
 template<std::size_t DIM>
-bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
+bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation, int sturdyLayers) {
     auto allPositions = polycube.allPositions();
     
     for (const auto& position : allPositions) {
