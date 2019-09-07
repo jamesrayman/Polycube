@@ -23,7 +23,7 @@ where `PUZZLEFILE` is the file containing the puzzle specification.
 
 For examples of puzzle specifications, see `./dat/` and `./test/`.
 
-File which are used to specify polycubes or puzzles should end in `.cube`. Such files are divided by hashtags (`#`) into sections.
+File which are used to specify polycubes should end in `.cubes`. Puzzle files should end in `.cube` or `.brick`. Such files are divided by hashtags (`#`) into sections.
 
 The first section is imports. Each line should be a file name, leading to another puzzle specification. From each file, import the first two sections (imports and polycubes). Imports are recursive, and no file is imported twice.
 
