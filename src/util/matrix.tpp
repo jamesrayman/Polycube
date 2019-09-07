@@ -185,6 +185,23 @@ std::vector<Matrix<DIM>> Matrix<DIM>::allRotations (int dimensions) {
 }
 
 template<std::size_t DIM>
+std::vector<Matrix<DIM>> Matrix<DIM>::allImproperRotations (int dimensions) {
+    std::vector<Matrix<DIM>> res;
+    Matrix<DIM> mat;
+    std::bitset<DIM> mask;
+    std::vector<int> v;
+
+    for (int i = dimensions; i < DIM; i++) {
+        mat[i][i] = 1;
+    }
+
+    generateAllRotations(res, mat, mask, v, 1, dimensions);
+    generateAllRotations(res, mat, mask, v, -1, dimensions);
+
+    return res;
+}
+
+template<std::size_t DIM>
 std::vector<Matrix<DIM>> Matrix<DIM>::allUnitTranslations () {
     std::vector<Matrix<DIM>> res;
     Vector<DIM-1> shift;
