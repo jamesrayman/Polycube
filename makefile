@@ -15,7 +15,7 @@ clean:
 	rm -f $(obj) bin/cli
 
 test:
-	valgrind --tool=callgrind ./bin/cli ./test/bedlam.cube
+	valgrind --tool=callgrind ./bin/cli ./dat/bedlam.cube
 	kcachegrind callgrind.out.*
 	rm -f *.out.*
 
