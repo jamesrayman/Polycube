@@ -10,7 +10,7 @@ template<std::size_t DIM>
 Board<DIM>::Board (const Board& other) = default;
 
 template<std::size_t DIM>
-Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) { 
+Board<DIM>::Board (const Lattice<int, DIM>& other, int sturdyLayers) : Lattice<int, DIM>(other), sturdyLayers(sturdyLayers) { 
     auto allPos = Lattice<int, DIM>::allPositions();
     std::unordered_map<int, int> cubeFreq;
 
@@ -63,12 +63,13 @@ bool Board<DIM>::secure (const Polycube<DIM>& polycube, const Matrix<DIM+1>& tra
 }
 
 template<std::size_t DIM>
-bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation, int sturdyLayers) {
+bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
     auto allPositions = polycube.allPositions();
     bool sturdy = false;
     
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;
+
         if (polycube[position] && (!Lattice<int, DIM>::inBounds(tPosition) || (*this)[tPosition] != 0)) {
             return false;
         }
@@ -86,10 +87,8 @@ void Board<DIM>::put (int index, int value) {
 }
 
 template<std::size_t DIM>
-bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
+void Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
     auto allPositions = polycube.allPositions();
-
-    if (!fits(polycube, transformation, this->shape()[1])) return false;
 
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;
@@ -100,8 +99,6 @@ bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& tran
     }
 
     nextCube++;
-
-    return true;
 }
 
 template<std::size_t DIM>

@@ -10,8 +10,7 @@ template<std::size_t DIM>
 Puzzle<DIM>::Puzzle (const Puzzle&) = default;
 
 template<std::size_t DIM>
-Puzzle<DIM>::Puzzle (const Board<DIM>& board, const std::vector<Polycube<DIM>>& polycubes, int sturdyLayers)
-: board(board), polycubes(polycubes), sturdyLayers(sturdyLayers) { 
+Puzzle<DIM>::Puzzle (const Board<DIM>& board, const std::vector<Polycube<DIM>>& polycubes) : board(board), polycubes(polycubes) { 
     nBoardCells = board.size();
     nCells = nBoardCells + polycubes.size();
 }
@@ -26,7 +25,7 @@ void Puzzle<DIM>::initialize () {
             for (const auto& position : allPositions) {
                 auto transform = Matrix<DIM+1>::translation(position) * rotation;
 
-                if (board.fits(polycube, transform, sturdyLayers)) {
+                if (board.fits(polycube, transform)) {
                     std::vector<char> candidate (nCells, false);
                     candidate[nBoardCells + polycubeIndex] = true;
 

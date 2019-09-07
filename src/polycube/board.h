@@ -11,6 +11,7 @@ template<std::size_t DIM>
 class Board : public Lattice<int, DIM> {
 private:
     int nextCube;
+    int sturdyLayers;
 
     using Lattice<int, DIM>::transform;
     using Lattice<int, DIM>::isomorphic;
@@ -22,12 +23,12 @@ private:
 public:
     Board ();
     Board (const Board&);
-    Board (const Lattice<int, DIM>&);
+    Board (const Lattice<int, DIM>&, int);
 
     bool secure (const Polycube<DIM>&, const Matrix<DIM+1>&);
-    bool fits (const Polycube<DIM>&, const Matrix<DIM+1>&, int);
+    bool fits (const Polycube<DIM>&, const Matrix<DIM+1>&);
     void put (int, int);
-    bool place (const Polycube<DIM>&, const Matrix<DIM+1>&);
+    void place (const Polycube<DIM>&, const Matrix<DIM+1>&);
     void unplace (const Polycube<DIM>&, const Matrix<DIM+1>&);
 
     bool operator== (const Board<DIM>&) const;
