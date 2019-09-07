@@ -5,8 +5,6 @@
 
 #include "dancing_chain.h"
 
-#include <iostream>
-
 void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr, DancingChain& chain, int solutionLimit) {
     if (chain.size() == 0) {
         res.push_back(curr);
@@ -15,7 +13,7 @@ void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr,
         return;
     }
 
-    if (solutionLimit > 0 && res.size() >= solutionLimit) return;
+    if (res.size() >= solutionLimit) return;
 
     int cellToFill = chain.mostConstrained();
     for (int cand = chain.down(cellToFill, 0); cand != 0; cand = chain.down(cellToFill, cand)) {
@@ -45,6 +43,10 @@ void stepExactCover (std::vector<std::vector<int>>& res, std::vector<int>& curr,
 
 std::vector<std::vector<int>> exactCover (const std::vector<std::vector<char>>& candidates, int solutionLimit) {
     std::vector<std::vector<int>> res;
+
+    if (candidates.size() == 0)
+        return res;
+
     DancingChain chain (candidates);
     std::vector<int> curr;
 

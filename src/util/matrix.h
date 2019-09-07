@@ -42,7 +42,8 @@ public:
 
     static Matrix<DIM> identity ();
     static Matrix<DIM> planeRotation (int, int, int);
-    static std::vector<Matrix<DIM>> allRotations(int);;
+    static std::vector<Matrix<DIM>> allRotations (int);
+    static std::vector<Matrix<DIM>> allUnitTranslations ();
     static Matrix<DIM> translation (const Vector<DIM-1>&);
 };
 

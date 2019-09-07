@@ -1,4 +1,5 @@
 #include "board.h"
+#include <iostream>
 
 template<std::size_t DIM>
 Board<DIM>::Board () {
@@ -29,17 +30,54 @@ Board<DIM>::Board (const Lattice<int, DIM>& other) : Lattice<int, DIM>(other) {
 }
 
 template<std::size_t DIM>
+bool Board<DIM>::secure (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
+    auto translations = Matrix<DIM+1>::allUnitTranslations();
+    auto allPositions = polycube.allPositions();
+    bool res = true;
+
+    place(polycube, transformation);
+
+    for (const auto& translation : translations) {
+        if (translation[DIM][1] != 0) continue;
+
+        bool slidable = true;
+
+        for (const auto& position : allPositions) {
+            auto tPosition = translation * transformation * position;
+
+            if (polycube[position] && Lattice<int, DIM>::inBounds(tPosition) && (*this)[tPosition] != nextCube-1) {
+                slidable = false;
+                break;
+            }
+        }
+
+        if (slidable) {
+            res = false;
+            break;
+        }
+    }
+    
+    unplace(polycube, transformation);
+
+    return res;
+}
+
+template<std::size_t DIM>
 bool Board<DIM>::fits (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation, int sturdyLayers) {
     auto allPositions = polycube.allPositions();
+    bool sturdy = false;
     
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;
         if (polycube[position] && (!Lattice<int, DIM>::inBounds(tPosition) || (*this)[tPosition] != 0)) {
             return false;
         }
+        if (polycube[position] && tPosition[1] >= this->shape()[1] - sturdyLayers) {
+            sturdy = true;
+        }      
     }
 
-    return true;
+    return sturdy || secure(polycube, transformation);
 }
 
 template<std::size_t DIM>
@@ -51,7 +89,7 @@ template<std::size_t DIM>
 bool Board<DIM>::place (const Polycube<DIM>& polycube, const Matrix<DIM+1>& transformation) {
     auto allPositions = polycube.allPositions();
 
-    if (!fits(polycube, transformation)) return false;
+    if (!fits(polycube, transformation, this->shape()[1])) return false;
 
     for (const auto& position : allPositions) {
         auto tPosition = transformation * position;

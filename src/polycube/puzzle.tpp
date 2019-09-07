@@ -49,7 +49,6 @@ template<std::size_t DIM>
 std::vector<Board<DIM>> Puzzle<DIM>::solve (int solutionLimit) const {
     std::vector<Board<DIM>> res;
 
-    // TODO: increase solution limit
     auto solutions = exactCover(candidates, solutionLimit);
 
     for (const auto& solution : solutions) {

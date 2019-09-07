@@ -138,8 +138,8 @@ Matrix<DIM> Matrix<DIM>::planeRotation (int xAxis, int yAxis, int qturns) {
 }
 
 template<std::size_t DIM>
-void Matrix<DIM>::generateAllRotations(std::vector<Matrix<DIM>>& res, Matrix<DIM>& curr, 
-                                       std::bitset<DIM>& mask, std::vector<int>& perm, int det, int n) {
+void Matrix<DIM>::generateAllRotations (std::vector<Matrix<DIM>>& res, Matrix<DIM>& curr, 
+                                        std::bitset<DIM>& mask, std::vector<int>& perm, int det, int n) {
     int i = perm.size();
     
     if (i == n) {
@@ -169,7 +169,7 @@ void Matrix<DIM>::generateAllRotations(std::vector<Matrix<DIM>>& res, Matrix<DIM
 }
 
 template<std::size_t DIM>
-std::vector<Matrix<DIM>> Matrix<DIM>::allRotations(int dimensions) {
+std::vector<Matrix<DIM>> Matrix<DIM>::allRotations (int dimensions) {
     std::vector<Matrix<DIM>> res;
     Matrix<DIM> mat;
     std::bitset<DIM> mask;
@@ -183,6 +183,26 @@ std::vector<Matrix<DIM>> Matrix<DIM>::allRotations(int dimensions) {
 
     return res;
 }
+
+template<std::size_t DIM>
+std::vector<Matrix<DIM>> Matrix<DIM>::allUnitTranslations () {
+    std::vector<Matrix<DIM>> res;
+    Vector<DIM-1> shift;
+
+    for (int i = 0; i < DIM-1; i++) {
+        shift[i] = 1;
+        res.push_back(Matrix<DIM>::translation(shift));
+
+        shift[i] = -1;
+        res.push_back(Matrix<DIM>::translation(shift));
+        
+        shift[i] = 0;
+    }
+
+    return res;
+}
+
+
 
 template<std::size_t DIM>
 Matrix<DIM> Matrix<DIM>::translation (const Vector<DIM-1>& shift) {

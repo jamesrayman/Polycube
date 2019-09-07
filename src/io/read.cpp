@@ -40,6 +40,7 @@ namespace read {
                     i++;
                     try {
                         solutionLimit = std::stoi(args[i]);
+                        if (solutionLimit <= 0) solutionLimit = 1e9;
                     }
                     catch (...) {
                         throw err::CliOptions(args[0]);

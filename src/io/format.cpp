@@ -54,14 +54,14 @@ namespace format {
         }
         else if (solutionsToCount == 1) {
             res += "There is ";
-            if (solutionsToCount >= solutions.size()) res += "at least ";
+            if (solutionsToCount == solutionLimit) res += "at least ";
             res += "1 solution, excluding rotations and reflections: \n\n";
         
             res += board(solutions[0], color) + "\n";
         }
         else {
             res += "There are ";
-            if (solutionsToCount >= solutions.size()) res += "at least ";
+            if (solutionsToCount == solutionLimit) res += "at least ";
             res += format::countable(solutionsToCount, "solution");
             res += ", excluding rotations and reflections: \n\n";
 
