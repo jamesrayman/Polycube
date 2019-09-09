@@ -55,7 +55,7 @@ namespace format {
         else if (solutionsToCount == 1) {
             res += "There is ";
             if (solutionsToCount == solutionLimit) res += "at least ";
-            res += "1 solution, excluding rotations and reflections: \n\n";
+            res += "1 solution, including rotations and reflections: \n\n";
         
             res += board(solutions[0], color) + "\n";
         }
@@ -63,7 +63,7 @@ namespace format {
             res += "There are ";
             if (solutionsToCount == solutionLimit) res += "at least ";
             res += format::countable(solutionsToCount, "solution");
-            res += ", excluding rotations and reflections: \n\n";
+            res += ", including rotations and reflections: \n\n";
 
             for (int i = 0; i < solutionsToPrint; i++) {
                 res += "Solution #" + std::to_string(i+1) + "\n";
