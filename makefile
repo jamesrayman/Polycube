@@ -4,7 +4,7 @@ obj = $(src:.cpp=.o)
 
 LDFLAGS = -std=c++17 -O3
 
-bin/cli: $(obj)
+bin/polycube: $(obj)
 	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -o $@ $^ $(LDFLAGS)
 
 %.o : %.cpp
