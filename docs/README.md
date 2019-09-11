@@ -1,7 +1,9 @@
 # Polycube
 A solver of polycube packing puzzles, such as the one below:
 
-\[INSERT IMAGE HERE\]
+![Unsolved Puzzle](./unsolved.jpg "Unsolved Puzzle")
+
+![Solved Puzzle](./solved.jpg "Solved Puzzle")
 
 ## Usage
 
