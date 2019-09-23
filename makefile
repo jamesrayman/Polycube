@@ -5,10 +5,10 @@ obj = $(src:.cpp=.o)
 LDFLAGS = -std=c++17 -O3
 
 bin/polycube: $(obj)
-	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -o $@ $^ $(LDFLAGS)
+	$(CXX) -static $(foreach dir,$(dirs),-I $(dir)) -o $@ $^ $(LDFLAGS)
 
 %.o : %.cpp
-	$(CXX) $(foreach dir,$(dirs),-I $(dir)) -c -o $@ $^ $(LDFLAGS)
+	$(CXX) -static $(foreach dir,$(dirs),-I $(dir)) -c -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean test clear
 clean:
