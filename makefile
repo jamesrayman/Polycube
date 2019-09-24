@@ -15,7 +15,7 @@ clean:
 	rm -f $(obj) bin/cli
 
 test:
-	valgrind --tool=callgrind ./bin/cli ./dat/bedlam.brick
+	valgrind --tool=callgrind ./bin/polycube ./dat/violet.brick
 	kcachegrind callgrind.out.*
 	rm -f *.out.*
 
