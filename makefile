@@ -12,7 +12,7 @@ bin/polycube: $(obj)
 
 .PHONY: clean test clear
 clean:
-	rm -f $(obj) bin/cli
+	rm -f $(obj) bin/*
 
 test:
 	valgrind --tool=callgrind ./bin/cli ./dat/bedlam.brick
