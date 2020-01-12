@@ -3,6 +3,10 @@ A solver of polycube packing puzzles, such as the one below:
 
 ![Puzzle](./puzzle.jpg "Puzzle")
 
+Example usage:
+
+![Usage](./demo.png "Usage")
+
 ## Usage
 
 ```
