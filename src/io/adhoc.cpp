@@ -67,7 +67,7 @@ struct Bag {
 };
 
 Bag easy ("3V 4I 4T 4L 4Z 4O 4Y 4IV 4VI",
-          "5I 5P 5N 5F 5T 5U 5V 5W 5X 5Y 5Z 5L 5QQ 5JL 5LV 5JV 5VV 5VZ 5SV 5JJ 5LL 5TI 5TL 5TJ 5TT 5ZZ 5SS 5ZV 5VS", 13); 
+          "5I 5P 5N 5F 5T 5U 5V 5W 5X 5Y 5Z 5L 5Q 5JL 5LV 5JV 5VV 5VZ 5SV 5JJ 5LL 5TI 5TL 5TJ 5TT 5ZZ 5SS 5ZV 5VS", 13); 
 
 int main () {
     easy.solve();
