@@ -3,6 +3,10 @@ A solver of polycube packing puzzles, such as the one below:
 
 ![Puzzle](./puzzle.jpg "Puzzle")
 
+Example usage:
+
+![Usage](./demo.png "Usage")
+
 ## Usage
 
 ```
@@ -34,3 +38,4 @@ The third section is the board specification: 3 integers specifying the length, 
 The fourth section specifies the polycubes used in the puzzle: a whitespace separated list of polycube names.
 
 Files which are imported must have at least 2 sections, while puzzle files must have at least 4.
+

@@ -13,14 +13,21 @@ bin/adhoc: $(obj) src/io/adhoc.o
 %.o : %.cpp
 	$(CXX) -static $(foreach dir,$(dirs),-I $(dir)) -c -o $@ $^ $(LDFLAGS)
 
-.PHONY: clean test clear
+
+.PHONY: clean test clear polycube adhoc
+
+polycube: bin/polycube
+
+adhoc: bin/adhoc
+
 clean:
 	rm -f $(obj) bin/*
 
 test:
-	valgrind --tool=callgrind ./bin/cli ./dat/bedlam.brick
+	valgrind --tool=callgrind ./bin/polycube ./dat/violet.brick
 	kcachegrind callgrind.out.*
 	rm -f *.out.*
 
 clear:
 	rm -f *.out.*
+
