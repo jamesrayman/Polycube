@@ -71,7 +71,6 @@ namespace parse {
                 auto segment = polycubes(dataSections[1]);
                 res.insert(segment.begin(), segment.end());
             }
-
         }
 
         return res;

@@ -1,5 +1,7 @@
 #include "puzzle.h"
 
+#include <algorithm>
+
 #include "format.h"
 #include "exact_cover.h"
 
@@ -36,7 +38,7 @@ void Puzzle<DIM>::initialize () {
                             candidate[board.intIndex(transform * pos)] = true;
                         }
                     }
-                    candidates.push_back(candidate);
+                    problem.push_back(candidate);
                 }
             }
         }
@@ -48,7 +50,7 @@ template<std::size_t DIM>
 std::vector<Board<DIM>> Puzzle<DIM>::solve (int solutionLimit) const {
     std::vector<Board<DIM>> res;
 
-    auto solutions = exactCover(candidates, solutionLimit);
+    auto solutions = exact_cover::solve(problem, solutionLimit, exact_cover::Method::dlx);
 
     for (const auto& solution : solutions) {
         Board<DIM> b = board;
@@ -56,7 +58,7 @@ std::vector<Board<DIM>> Puzzle<DIM>::solve (int solutionLimit) const {
 
         for (int cand : solution) {
             for (int i = 0; i < nBoardCells; i++) {
-                if (candidates[cand][i]) {
+                if (problem[cand][i]) {
                     b.put(i, cube);
                 }
             }

@@ -6,6 +6,7 @@
 #include "puzzle.h"
 #include "read.h"
 #include "parse.h"
+#include "stopwatch.h"
 
 int z = 0;
 
@@ -66,13 +67,15 @@ struct Bag {
     }
 };
 
-Bag easy ("3V 4I 4T 4L 4Z 4O 4Y 4IV 4VI",
-          "5I 5P 5N 5F 5T 5U 5V 5W 5X 5Y 5Z 5L 5Q 5JL 5LV 5JV 5VV 5VZ 5SV 5JJ 5LL 5TI 5TL 5TJ 5TT 5ZZ 5SS 5ZV 5VS", 13); 
+std::string small = "3V 4I 4T 4L 4Z 4O 4Y 4IV 4VI";
+std::string large =
+    "5I 5P 5N 5F 5T 5U 5V 5W 5X 5Y 5Z 5L 5Q 5JL 5LV 5JV 5VV 5VZ 5SV 5JJ 5LL 5TI 5TL 5TJ 5TT 5ZZ 5SS 5ZV 5VS";
+
+Bag easy (small, large, 13); 
+Bag hard ("", large, 20); 
 
 int main () {
-    easy.solve();
-
-    std::cout << z << "\n";
+    hard.solve();
 
     return 0;
 }

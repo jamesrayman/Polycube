@@ -3,13 +3,14 @@
 #include <vector>
 
 #include "board.h"
+#include "exact_cover.h"
 
 template<std::size_t DIM>
 class Puzzle {
 private:
     Board<DIM> board;
     std::vector<Polycube<DIM>> polycubes;
-    std::vector<std::vector<char>> candidates;
+    exact_cover::Problem problem;
 
     int nBoardCells, nCells;
 public:

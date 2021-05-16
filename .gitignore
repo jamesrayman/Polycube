@@ -33,5 +33,5 @@
 /bin/
 
 # Other
-/.vscode/
+.vscode/
 *.out.*
