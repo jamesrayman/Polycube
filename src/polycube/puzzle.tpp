@@ -72,3 +72,4 @@ std::vector<Board<DIM>> Puzzle<DIM>::solve (int solutionLimit) const {
 
     return res;
 }
+

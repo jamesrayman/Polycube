@@ -1,17 +1,18 @@
 src = $(wildcard src/**/*.cpp)
+tpp = $(wildcard src/**/*.tpp)
 dirs = $(wildcard src/**/)
 obj = $(filter-out src/io/cli.o,$(filter-out src/io/adhoc.o,$(src:.cpp=.o)))
 
 includes = $(foreach dir,$(dirs),-I $(dir))
 LDFLAGS = -l:libz3.so -std=c++17 -O3
 
-bin/polycube: $(obj) src/io/cli.o
-	$(CXX) $(includes) -o $@ $^ $(LDFLAGS)
+bin/polycube: $(obj) src/io/cli.o $(tpp)
+	$(CXX) $(includes) -o $@ $(obj) src/io/cli.o $(LDFLAGS)
 
-bin/adhoc: $(obj) src/io/adhoc.o
-	$(CXX) $(includes) -o $@ $^ $(LDFLAGS)
+bin/adhoc: $(obj) src/io/adhoc.o $(tpp)
+	$(CXX) $(includes) -o $@ $(obj) src/io/adhoc.o $(LDFLAGS)
 
-%.o : %.cpp
+%.o: %.cpp
 	$(CXX) $(includes) -c -o $@ $^ $(LDFLAGS)
 
 
