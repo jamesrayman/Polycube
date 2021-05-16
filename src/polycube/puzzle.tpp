@@ -1,6 +1,7 @@
 #include "puzzle.h"
 
 #include <algorithm>
+#include <set>
 
 #include "format.h"
 #include "exact_cover.h"

@@ -2,10 +2,14 @@
 
 #include <vector>
 #include <algorithm>
+// #include <iostream>
 
 #include "dancing_chain.h"
+#include "util.h"
 
 namespace exact_cover {
+    // int z;
+
     void stepDlx (std::vector<Solution>& res, Solution& curr, DancingChain& chain, int solutionLimit) {
         if (chain.size() == 0) {
             res.push_back(curr);
@@ -17,8 +21,18 @@ namespace exact_cover {
         if (res.size() >= solutionLimit) return;
 
         int cellToFill = chain.mostConstrained();
+        int candCount = chain.size(cellToFill) - 1;
+
+        if (candCount == 0) {
+            // z++;
+            // res.push_back(curr);
+            // std::sort(res.back().begin(), res.back().end());
+
+            return;
+        }
+
         int startCand = 0;
-        int startCandIndex = std::rand() % chain.size(cellToFill); // TODO: replace with <random>
+        int startCandIndex = util::rand_int(std::min(40, candCount));
 
         for (int i = 0; i < startCandIndex; i++) {
             startCand = chain.down(cellToFill, startCand);
@@ -71,7 +85,9 @@ namespace exact_cover {
         DancingChain chain(problem);
         Solution curr;
 
+        // z = 0;
         stepDlx(res, curr, chain, solutionLimit);
+        // std::cout << z << "\n";
 
         return res;
     }

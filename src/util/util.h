@@ -16,6 +16,8 @@ namespace util {
 
     template<std::size_t N>
     inline std::vector<Vector<N>> allMinors (const Vector<N>&);
+
+    int rand_int (int);
 }
 
 #include "util.tpp"
