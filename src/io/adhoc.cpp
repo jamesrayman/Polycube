@@ -8,8 +8,6 @@
 #include "parse.h"
 #include "stopwatch.h"
 
-int z = 0;
-
 std::unordered_set<std::string> visited;
 auto polycubeList = parse::import("./dat/41.cubes", visited);
 Board unconstrained = parse::board("5 5 4"), constrained = parse::board("5 5 4 1");
@@ -27,7 +25,7 @@ struct Bag {
             variable.push_back(word);
         }
     }
-    
+
     void solve () {
         solve(fixed, 0, 0);
     }
@@ -57,9 +55,9 @@ struct Bag {
         }
         for (; i <= variable.size() - (k-j); i++) {
             spec += " " + variable[i];
-            
+
             solve(spec, i+1, j+1);
-            
+
             for (int a = 0; a < variable[i].size() + 1; a++) {
                 spec.pop_back();
             }
