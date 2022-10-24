@@ -1,3 +1,5 @@
+.DELETE_ON_ERROR:
+
 src = $(wildcard src/**/*.cpp)
 tpp = $(wildcard src/**/*.tpp)
 dirs = $(wildcard src/**/)
